@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AF Dark - Gerador de códigos (PRIVADO)</title>
+<style>
+:root{--bg:#150a10;--fg:#f2e7ea;--card:#24131c;--mut:#a98f99;--ac:#e0567a;--ln:#37222c}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
+main{width:100%;max-width:420px;background:var(--card);border:1px solid var(--ln);border-radius:18px;padding:24px}
+h1{font:700 22px Georgia,serif;margin:0 0 4px}p{margin:0 0 16px;color:var(--mut);font-size:14px}
+input,button{font:inherit;width:100%;padding:13px;border-radius:12px;margin-bottom:10px}
+input{border:1px solid var(--ln);background:var(--bg);color:var(--fg);text-align:center;text-transform:uppercase;letter-spacing:.06em}
+button{border:0;background:var(--ac);color:#fff;font-weight:600;cursor:pointer}button.s{background:transparent;border:1.5px solid var(--ac);color:var(--ac)}
+#out{font:700 30px ui-monospace,Consolas,monospace;letter-spacing:.12em;text-align:center;background:var(--bg);border-radius:12px;padding:16px 6px;min-height:68px;user-select:all}
+#m{min-height:1.4em;color:var(--ac);font-size:14px;margin:8px 0}:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+</style></head><body><main>
+<h1>Gerador de códigos</h1><p>Uso privado. Cole o ID que o leitor enviou e gere o código de desbloqueio.</p>
+<input id="id" placeholder="ID do leitor (XXXX-XXXX-XXXX)" autocomplete="off">
+<button id="g">Gerar código</button><div id="out"></div><div id="m" role="status"></div>
+<button class="s" id="c">Copiar código</button>
+</main><script>
+const SEGREDO='ADCCDA8B8769F31B825299B9'; /* deve ser igual à do index.html do AF Dark */
+async function mk(id){const e=new TextEncoder(),k=await crypto.subtle.importKey('raw',e.encode(SEGREDO),{name:'HMAC',hash:'SHA-256'},false,['sign']);const h=Array.from(new Uint8Array(await crypto.subtle.sign('HMAC',k,e.encode(id))),x=>x.toString(16).padStart(2,'0')).join('').toUpperCase();return h.slice(0,4)+'-'+h.slice(4,8)}
+const $=i=>document.getElementById(i);
+$('g').onclick=async()=>{const id=$('id').value.trim().toUpperCase();$('out').textContent='';
+if(!/^[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}$/.test(id)){$('m').textContent='ID inválido. Ele tem 12 caracteres no formato XXXX-XXXX-XXXX.';return}
+$('m').textContent='';try{$('out').textContent=await mk(id)}catch(e){$('m').textContent='Abra este arquivo em um navegador com https ou localhost.'}};
+$('c').onclick=()=>{const v=$('out').textContent;if(v)navigator.clipboard.writeText(v).then(()=>$('m').textContent='Código copiado.')};
+</script></body></html>
