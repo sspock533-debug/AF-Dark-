@@ -2,7 +2,7 @@
    Ao mudar este arquivo, troque o número da versão em sw.js (capitulos-v1 -> v2). */
 const PH=['Cole aqui o texto deste capítulo no arquivo stories.js.'];
 const STORIES=[
-{id:'herdeira',title:'Herdeira do Silêncio',author:'AF Dark',g:'Dark romance',novo:1,
+{id:'herdeira',title:'Herdeira do Silêncio',author:'AF Dark',g:'Dark romance',novo:1,free:1,
 syn:'Helena, advogada criminalista, aceita defender o chefe da família mais temida da cidade. Em troca do dinheiro de que precisa, descobre que o caso tem ligação com a morte do próprio pai. Para chegar à verdade, terá de confiar no homem que todos chamam de monstro.',
 ch:[
 {t:'O Cliente',p:[
