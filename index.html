@@ -1,0 +1,119 @@
+<!doctype html><html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>AF Dark</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#150a10"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#150a10;--fg:#f2e7ea;--card:#24131c;--mut:#a98f99;--ac:#e0567a;--ln:#37222c}
+[data-t=sepia]{--bg:#f2e6d0;--fg:#3a2e22;--card:#e6d6ba;--mut:#7d6a55;--ac:#a8452f;--ln:#d6c4a4}
+[data-t=light]{--bg:#fbf8f8;--fg:#201418;--card:#f0e8ea;--mut:#79646c;--ac:#c23a60;--ln:#e3d6da}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,sans-serif;padding-top:env(safe-area-inset-top)}
+#app{padding:0 16px 88px;min-height:100vh}
+h1.t{font:700 28px Georgia,serif;padding:20px 0 12px}
+h2{font:600 17px Georgia,serif;margin:22px 0 10px}
+.row{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
+.card{flex:0 0 132px;position:relative}.grid .card{flex:auto}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card em{position:absolute;top:8px;left:8px;background:var(--ac);color:#fff;font:600 10px system-ui;padding:3px 8px;border-radius:10px;font-style:normal}
+.cv{aspect-ratio:2/3;border-radius:16px;background:linear-gradient(160deg,hsl(var(--h) 55% 32%),hsl(calc(var(--h) + 40) 60% 12%));display:flex;align-items:flex-end;padding:10px;font:700 15px/1.15 Georgia,serif;color:#fff;margin-bottom:6px}
+.cv.sm{width:64px;flex:none;font-size:9px;padding:6px;border-radius:10px;margin:0}
+.cv.lg{width:55%;margin:12px auto}
+.card b{display:block;font-size:14px}.card small,small{color:var(--mut);font-size:12.5px}
+.cont{display:flex;gap:12px;background:var(--card);border-radius:16px;padding:12px;align-items:center}
+.ci{flex:1}.ci b{display:block}
+.pb{display:block;height:5px;border-radius:3px;background:var(--ln);margin-top:8px;overflow:hidden}.pb u{display:block;height:100%;background:var(--ac)}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--card);border-top:1px solid var(--ln);padding:6px 0 calc(6px + env(safe-area-inset-bottom))}
+nav button{flex:1;background:none;border:0;color:var(--mut);font:12px system-ui;padding:6px;display:flex;flex-direction:column;gap:2px;align-items:center}
+nav button span{font-size:19px}nav .on{color:var(--ac)}
+.tabs,.chips{display:flex;gap:8px;overflow-x:auto;margin:6px 0 16px}
+.tabs button,.chips button,.sec button,.r button{border:1px solid var(--ln);background:var(--card);color:var(--fg);border-radius:20px;padding:8px 14px;font:14px system-ui;white-space:nowrap}
+.tabs .on,.chips .on,.r .on{border-color:var(--ac);color:var(--ac)}
+input{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--ln);background:var(--card);color:var(--fg);font:16px system-ui;margin-bottom:12px}
+.empty{color:var(--mut);text-align:center;padding:36px 12px}
+.cta{display:block;width:100%;border:0;border-radius:14px;background:var(--ac);color:#fff;font:600 17px system-ui;padding:15px;margin:16px 0}
+.lnk{background:none;border:0;color:var(--ac);font:14px system-ui;padding:8px 0;display:block}
+.back{background:none;border:0;color:var(--fg);font:17px system-ui;padding:16px 0 0}
+.sp h1{font:700 26px Georgia,serif;text-align:center}.sp>small{display:block;text-align:center;margin-top:4px}
+.syn{margin-top:14px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;color:var(--mut)}.syn.open{display:block}
+.sec{display:flex;gap:8px;flex-wrap:wrap}
+.chap{padding:14px 0;border-bottom:1px solid var(--ln)}
+.me{display:flex;align-items:center;gap:12px}.av{width:56px;height:56px;border-radius:50%;background:var(--ac);display:grid;place-items:center;font:700 24px Georgia,serif;color:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0;text-align:center;color:var(--mut);font-size:12.5px}.stats div{background:var(--card);border-radius:14px;padding:12px}.stats b{display:block;font:700 22px Georgia,serif;color:var(--fg)}
+.rd{position:fixed;inset:0;overflow-y:auto;background:var(--bg);padding-top:env(safe-area-inset-top)}
+.rd article{max-width:640px;margin:0 auto;padding:64px 22px 110px;font-size:var(--fs,19px);line-height:var(--lh,1.7)}
+[data-f=serif] .rd article{font-family:Georgia,'Times New Roman',serif}
+.rd article h2{margin:4px 0 22px;font-size:1.3em}.rd article p{margin-bottom:1em}
+.bar{position:fixed;left:0;right:0;display:flex;align-items:center;gap:8px;background:var(--card);padding:10px 12px;transition:transform .2s;z-index:3}
+.tb{top:0;padding-top:calc(10px + env(safe-area-inset-top));transform:translateY(-120%)}
+.bb{bottom:0;justify-content:space-between;padding-bottom:calc(10px + env(safe-area-inset-bottom));transform:translateY(120%)}
+.bar.show{transform:none}
+.bar button{background:none;border:0;color:var(--fg);font:16px system-ui;padding:8px 10px}.bar button:disabled{opacity:.3}
+.sheet{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-radius:20px 20px 0 0;padding:18px 18px calc(18px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .25s;z-index:4;box-shadow:0 -8px 30px #0006}.sheet.show{transform:none}
+.r{display:flex;justify-content:space-between;align-items:center;padding:10px 0}.r span{display:flex;gap:6px}
+.stars{text-align:center;font-size:28px;color:var(--ac)}.stars button{background:none;border:0;color:inherit;font-size:inherit}
+.end{margin-top:30px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div id="app"></div>
+<script src="stories.js"></script>
+<script>
+const $=q=>document.querySelector(q);
+let S;try{S=JSON.parse(localStorage.getItem('lt'))}catch(e){}
+S=S||{fav:[],dl:[],prog:{},last:null,set:{size:19,font:'serif',lh:1.7,theme:'dark'},name:'Leitor'};
+let tm;const save=()=>{try{localStorage.setItem('lt',JSON.stringify(S))}catch(e){}};
+const st=id=>STORIES.find(s=>s.id==id);
+const G=[...new Set(STORIES.map(s=>s.g))];
+let V={tab:'home',story:null,read:null,q:'',g:'',lib:'Lendo',more:0,bars:0,panel:0};
+const P=id=>S.prog[id]||{c:0,r:0};
+const pct=s=>{const p=S.prog[s.id];return p?Math.min(100,Math.round((p.c+p.r)/s.ch.length*100)):0};
+const hue=s=>[...s.id].reduce((a,c)=>a+c.charCodeAt(0)*7,0)%360;
+const cov=(s,z)=>`<div class="cv ${z||''}" style="--h:${hue(s)}"><span>${s.title}</span></div>`;
+const card=s=>`<div class=card data-a=open data-id=${s.id}>${s.novo?'<em>novo capítulo</em>':''}${cov(s)}<b>${s.title}</b><small>${s.author}</small></div>`;
+const row=(t,l)=>`<section><h2>${t}</h2><div class=row>${l.map(card).join('')}</div></section>`;
+const nav=()=>`<nav>${[['home','⌂','Início'],['lib','▤','Biblioteca'],['search','⌕','Buscar'],['me','☺','Perfil']].map(([k,i,l])=>`<button class="${V.tab==k?'on':''}" data-a=tab data-v=${k}><span>${i}</span>${l}</button>`).join('')}</nav>`;
+const themes=()=>['dark','sepia','light'].map(x=>`<button class="${S.set.theme==x?'on':''}" data-a=theme data-v=${x}>${{dark:'Escuro',sepia:'Sépia',light:'Claro'}[x]}</button>`).join('');
+function vHome(){const l=S.last&&st(S.last),p=l&&P(l.id);
+return `<h1 class=t>AF Dark</h1>`+(l?`<section><h2>Continuar lendo</h2><div class=cont data-a=open data-id=${l.id}>${cov(l,'sm')}<div class=ci><b>${l.title}</b><small>Cap. ${p.c+1}: ${l.ch[p.c].t}</small><i class=pb><u style="width:${pct(l)}%"></u></i></div></div></section>`:'')+row('Recomendados',STORIES)+row('Novos capítulos',[...STORIES].reverse())+G.map(g=>row(g,STORIES.filter(s=>s.g==g))).join('')}
+function vLib(){const f={Lendo:s=>S.prog[s.id],Favoritos:s=>S.fav.includes(s.id),Baixados:s=>S.dl.includes(s.id),Listas:()=>0};
+const l=STORIES.filter(f[V.lib]);
+const em={Lendo:'Você ainda não começou nenhuma história.',Favoritos:'Você ainda não tem favoritos.',Baixados:'Nada baixado ainda. Baixe uma história para ler sem internet.',Listas:'As listas personalizadas chegam em breve.'}[V.lib];
+return `<h1 class=t>Biblioteca</h1><div class=tabs>${Object.keys(f).map(t=>`<button class="${t==V.lib?'on':''}" data-a=lib data-v=${t}>${t}</button>`).join('')}</div>`+(l.length?`<div class=grid>${l.map(card).join('')}</div>`:`<p class=empty>${em}</p>`)}
+const res=()=>{const q=V.q.toLowerCase(),l=STORIES.filter(s=>(!V.g||s.g==V.g)&&(s.title+s.author+s.g).toLowerCase().includes(q));return l.length?`<div class=grid>${l.map(card).join('')}</div>`:'<p class=empty>Nenhuma história encontrada. Tente outro termo.</p>'};
+const vSearch=()=>`<h1 class=t>Buscar</h1><input id=q placeholder="Título, autor ou gênero" value="${V.q.replace(/"/g,'&quot;')}"><div class=chips>${G.map(g=>`<button class="${g==V.g?'on':''}" data-a=g data-v="${g}">${g}</button>`).join('')}</div><div id=res>${res()}</div>`;
+function vMe(){return `<h1 class=t>Perfil</h1><div class=me><div class=av>${S.name[0].toUpperCase()}</div><b>${S.name}</b></div><div class=stats><div><b>${Object.keys(S.prog).length}</b>em leitura</div><div><b>${S.fav.length}</b>favoritos</div><div><b>${S.dl.length}</b>baixados</div></div><div class=r>Tema<span>${themes()}</span></div><button class=lnk data-a=name>Alterar nome</button><button class=lnk data-a=reset>Apagar meus dados</button>`}
+function vStory(){const s=st(V.story),p=S.prog[s.id];
+return `<div class=sp><button class=back data-a=back>‹ Voltar</button>${cov(s,'lg')}<h1>${s.title}</h1><small>${s.author} · ${s.g} · ${s.ch.length} capítulos</small><p class="syn ${V.more?'open':''}">${s.syn}</p><button class=lnk data-a=more>${V.more?'ver menos':'ver mais'}</button><button class=cta data-a=read data-c=${p?p.c:0}>${p?'Continuar':'Ler'}</button><div class=sec><button data-a=fav>${S.fav.includes(s.id)?'♥ Favorito':'♡ Favoritar'}</button><button data-a=dl>${S.dl.includes(s.id)?'✓ Baixado':'⬇ Baixar'}</button><button data-a=share>Compartilhar</button></div><h2>Capítulos</h2>${s.ch.map((c,i)=>`<div class=chap data-a=read data-c=${i}>${i+1}. ${c.t}</div>`).join('')}</div>`}
+const sheetIn=()=>{const t=S.set;return `<b>Ajustes de leitura</b><div class=r>Tamanho<span><button data-a=set data-k=size data-d=-1>A−</button><button data-a=set data-k=size data-d=1>A+</button></span></div><div class=r>Fonte<span><button class="${t.font=='serif'?'on':''}" data-a=font data-v=serif>Serifa</button><button class="${t.font=='sans'?'on':''}" data-a=font data-v=sans>Simples</button></span></div><div class=r>Espaçamento<span><button data-a=set data-k=lh data-d=-.1>−</button><button data-a=set data-k=lh data-d=.1>+</button></span></div><div class=r>Tema<span>${themes()}</span></div><button class=cta data-a=aa>Fechar</button>`};
+function vRead(){const s=st(V.story),c=V.read.c,ch=s.ch[c],last=c==s.ch.length-1,rt=P(s.id).rate||0;
+return `<div id=rd class=rd><div class="bar tb"><button data-a=back>‹</button><b>${s.title}</b></div><article data-a=tap><small>Capítulo ${c+1}</small><h2>${ch.t}</h2>${ch.p.map(x=>`<p>${x}</p>`).join('')}<div class=end>${last?'<p class=empty>Fim da história. Obrigado por ler!</p>':`<button class=cta data-a=read data-c=${c+1}>Próximo capítulo</button>`}<div class=stars>${[1,2,3,4,5].map(n=>`<button data-a=rate data-v=${n}>${rt>=n?'★':'☆'}</button>`).join('')}</div></div></article><div class="bar bb"><button data-a=read data-c=${c-1} ${c?'':'disabled'}>‹ Anterior</button><button data-a=aa>Aa</button><button data-a=read data-c=${c+1} ${last?'disabled':''}>Próximo ›</button></div><div class=sheet>${sheetIn()}</div></div>`}
+function attrs(){const b=document.body;b.dataset.t=S.set.theme;b.dataset.f=S.set.font;b.style.setProperty('--fs',S.set.size+'px');b.style.setProperty('--lh',S.set.lh)}
+function render(){attrs();const a=$('#app');
+if(V.read){a.innerHTML=vRead();const d=$('#rd');d.scrollTop=P(V.story).r*(d.scrollHeight-d.clientHeight)||0;
+d.onscroll=()=>{const p=S.prog[V.story];p.r=d.scrollTop/Math.max(1,d.scrollHeight-d.clientHeight);clearTimeout(tm);tm=setTimeout(save,400)};return}
+a.innerHTML=(V.story?vStory():({home:vHome,lib:vLib,search:vSearch,me:vMe}[V.tab])())+(V.story?'':nav())}
+function apply(){save();attrs();const sh=$('.sheet');sh?sh.innerHTML=sheetIn():render()}
+function go(v){Object.assign(V,v);history.pushState(0,'');render()}
+function openRead(c){const s=st(V.story);if(c<0||c>=s.ch.length)return;const p=S.prog[s.id]=S.prog[s.id]||{c:0,r:0};
+if(p.c!=c)p.r=0;p.c=c;S.last=s.id;save();const was=V.read;V.read={c};V.bars=0;V.panel=0;if(!was)history.pushState(0,'');render();if(was)$('#rd').scrollTop=0}
+function tog(k){const i=S[k].indexOf(V.story);i<0?S[k].push(V.story):S[k].splice(i,1);save();render()}
+addEventListener('popstate',()=>{if(V.read)V.read=null;else if(V.story)V.story=null;render()});
+$('#app').addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;const d=t.dataset;
+switch(d.a){
+case'tab':V.tab=d.v;render();break;
+case'open':go({story:d.id,more:0});break;
+case'back':history.back();break;
+case'more':V.more=!V.more;render();break;
+case'lib':V.lib=d.v;render();break;
+case'g':V.g=V.g==d.v?'':d.v;render();break;
+case'fav':tog('fav');break;
+case'dl':tog('dl');break;
+case'share':{const s=st(V.story);navigator.share&&navigator.share({title:s.title,text:'Leia '+s.title+' no AF Dark'}).catch(()=>{});break}
+case'read':openRead(+d.c);break;
+case'tap':V.bars=!V.bars;$('.tb').classList.toggle('show',V.bars);$('.bb').classList.toggle('show',V.bars);break;
+case'aa':V.panel=!V.panel;$('.sheet').classList.toggle('show',V.panel);break;
+case'set':{const k=d.k,n=S.set[k]+ +d.d;S.set[k]=k=='size'?Math.min(30,Math.max(14,n)):Math.min(2.4,Math.max(1.3,+n.toFixed(1)));apply();break}
+case'font':S.set.font=d.v;apply();break;
+case'theme':S.set.theme=d.v;apply();break;
+case'rate':{const p=S.prog[V.story];p.rate=+d.v;save();document.querySelectorAll('.stars button').forEach((b,i)=>b.textContent=i<d.v?'★':'☆');break}
+case'name':{const n=prompt('Seu nome:',S.name);if(n&&n.trim()){S.name=n.trim();save();render()}break}
+case'reset':if(confirm('Apagar favoritos, progresso e ajustes?')){try{localStorage.removeItem('lt')}catch(e){}location.reload()}break}});
+document.addEventListener('input',e=>{if(e.target.id=='q'){V.q=e.target.value;$('#res').innerHTML=res()}});
+if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
+render();
+</script></body></html>
